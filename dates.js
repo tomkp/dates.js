@@ -37,10 +37,7 @@ Dates.i18n = {
 };
 
 
-
-
 Dates.parse = function(dateStr, format, locale) {
-
     locale = locale || "en_GB";
 
     log("date '", dateStr, "' format '", format, ", locale '", locale, "'");
@@ -85,7 +82,7 @@ Dates.parse = function(dateStr, format, locale) {
             //80 years before and 20 after
             value = Number(value);
             var thisYear = new Date().getFullYear();
-            if ((value + 2000) - thisYear < 20) (value = Number(value) + 2000);
+            if ((value + 2000) - thisYear < 20) (value += 2000);
             date.setYear(value);
         },
         "HH": function(value) {
@@ -121,77 +118,35 @@ Dates.parse = function(dateStr, format, locale) {
     };
 
     var index = 0, token;
-
     var formatTokens = format.split(/[^A-Za-z]/);
     var dateTokens = dateStr.split(/[^A-Za-z0-9]/);
-
     for (var i = 0; i < formatTokens.length; i++) {
-
         var formatToken = formatTokens[i];
-
         var dateToken = dateTokens[i];
-
         var func = funcs[formatToken];
-
         if (func != undefined) {
-
             // straightforward match
-
-            //log("format token '", formatToken, "', date token '", dateToken, "'");
-
             func(dateToken);
-
-            //x += dateToken.length;
-
             index = 0;
-
         } else {
-
             // need to split format
-
             var res;
-
             while ((res = /d{1,2}|M{1,4}|yy(?:yy)|H{1,2}|m{1,2}|s{1,2}|S{1,3}|\w/g.exec(formatToken)) !== null) {
-
                 //log("res '", res, "', date token '", dateToken, "'");
-
                 func = funcs[res];
-
                 if (func != undefined) {
-
                     if (res[0].match(/MMMM/)) {
-
                         token = /\D+/.exec(dateToken);
-
-                        //log("val[0] ", token[0]);
-
                         func(token[0]);
-
                         index += token[0].length;
-
                     } else {
-
-                        //var index = res.index;
-                        //var length = res[0].length;
-
-                        //log("x:", x, ", index:", index, ", length:", length);
-
                         token = dateToken.substr(index, res[0].length);
-
-                        //var val = dateStr.substr(x, length);
-
-                        //log("token ", token);
-
                         func(token);
-
                         index += token.length;
                     }
                 }  else {
-
                     // any non formatting characters
-                    
                     index += res[0].length;
-
                 }
             }
         }
@@ -203,80 +158,60 @@ Dates.parse = function(dateStr, format, locale) {
 
 Dates.format = function(date, format, locale) {
 
-
     locale = locale || "en_GB";
     
-
     var pad = function(num) {
         return num < 10 ? "0" + num : num;
     };
 
-
     date = new Date(date);
 
-
     var funcs = {
-
         dd: function() {
             return pad(date.getDate());
         },
-
         d: function() {
             return date.getDate();
         },
-
         MMMM: function() {
             return Dates.i18n[locale].months[date.getMonth()];
         },
-
         MMM: function() {
             return Dates.i18n[locale].shortMonths[date.getMonth()];
         },
-
         MM: function() {
             return pad((date.getMonth() + 1));
         },
-
         M: function() {
             return (date.getMonth() + 1);
         },
-
         yyyy: function() {
             return date.getFullYear();
         },
-
         yy: function() {
             return String(date.getFullYear()).substr(2,2);
         },
-
         HH: function() {
             return pad(date.getHours());
         },
-
         mm: function() {
             return pad(date.getMinutes());
         },
-
         ss: function() {
             return pad(date.getSeconds());
         },
-
         SSS: function() {
             return pad(date.getMilliseconds());
         },
-
         SS: function() {
             return pad(date.getMilliseconds());
         },
-        
         S: function() {
             return date.getMilliseconds();
         }
-
     };
 
     return format.replace(/dd|d|M{1,4}|yyyy|yy|HH|mm|ss|S{1,3}/g, function(match, index) {
-        //log("match:'", match,", index:'",index, "'");
         return funcs[match](match, index);
     });
 };
