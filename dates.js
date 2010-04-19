@@ -11,10 +11,8 @@ m 	Minute in hour 	        Number 	30
 s 	Second in minute 	    Number 	55
 S 	Millisecond 	        Number 	978
 Z 	Time zone 	            RFC 822 time zone 	-0800
- */
+*/
 
-
-log = console.log;
 
 
 var Dates = {
@@ -40,7 +38,7 @@ Dates.i18n = {
 Dates.parse = function(dateStr, format, locale) {
     locale = locale || "en_GB";
 
-    log("date '", dateStr, "' format '", format, ", locale '", locale, "'");
+    //log("date '", dateStr, "' format '", format, ", locale '", locale, "'");
 
     var date = new Date();
     date.setHours(0);
@@ -208,6 +206,12 @@ Dates.format = function(date, format, locale) {
         },
         S: function() {
             return date.getMilliseconds();
+        },
+        EEEE: function() {
+            return Dates.i18n[locale].days[date.getDay()];
+        },
+        EEE: function() {
+            return Dates.i18n[locale].shortDays[date.getDay()];
         }
     };
 
