@@ -176,6 +176,17 @@ Riot.context('formatting dates', function() {
         should("format 2010-04-14T18:02:39.123Z", Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "yyyy-MM-ddTHH:mm:ss.SSSZ")).equals("2010-04-14T18:02:39.123Z");
     });
 
+    given("the format EEE dd MMM yyyy", function() {
+        should("format Wed 14 Apr 2010", Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "EEE dd MMM yyyy")).equals("Wed 14 Apr 2010");
+    });
+
+    given("the format EEEE dd MMM yyyy", function() {
+        should("format Wednesday 14 Apr 2010", Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "EEEE dd MMM yyyy")).equals("Wednesday 14 Apr 2010");
+    });
+
+    
+
+
 });
 
 

@@ -1,15 +1,12 @@
 /*
  y 	Year 	                Year 	1996; 96
  M 	Month in year 	        Month 	July; Jul; 07
- w 	Week in year 	        Number 	27
  d 	Day in month 	        Number 	10
  E 	Day in week 	        Text 	Tuesday; Tue
- H 	Hour in day (0-23) 	    Number 	0
- h 	Hour in am/pm (1-12) 	Number 	12
+ H 	Hour in day (0-23) 	    Number 	18
  m 	Minute in hour 	        Number 	30
  s 	Second in minute 	    Number 	55
  S 	Millisecond 	        Number 	978
- Z 	Time zone 	            RFC 822 time zone 	-0800
  */
 
 (function(global) {
@@ -109,7 +106,7 @@
                 // ignore
             },
             "Z": function() {
-                // UTC?
+                // timezone
             }
         };
 
@@ -208,7 +205,7 @@
             }
         };
 
-        return format.replace(/dd|d|M{1,4}|yyyy|yy|HH|mm|ss|S{1,3}/g, function(match, index) {
+        return format.replace(/dd|d|M{1,4}|yyyy|yy|HH|mm|ss|S{1,3}|E{3,4}/g, function(match, index) {
             return funcs[match](match, index);
         });
     };
