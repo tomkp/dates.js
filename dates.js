@@ -13,9 +13,6 @@ Z 	Time zone 	            RFC 822 time zone 	-0800
  */
 
 
-log = console.log;
-
-
 var Dates = {
 };
 
@@ -27,7 +24,7 @@ Dates.i18n = {
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     }
- ;
+ };
 
 
 Dates.parse = function(dateStr, format, locale) {
