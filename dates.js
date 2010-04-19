@@ -1,4 +1,3 @@
-
 /*
 y 	Year 	                Year 	1996; 96
 M 	Month in year 	        Month 	July; Jul; 07
@@ -27,14 +26,8 @@ Dates.i18n = {
         shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    },
-    fr_Fr: {
-        days: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
-        shortDays: ["dim.", "lun.", "mar.", "mer.", "jeu.", "ven.", "sam."],
-        months: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
-        shortMonths: ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
     }
-};
+ ;
 
 
 Dates.parse = function(dateStr, format, locale) {
