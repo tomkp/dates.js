@@ -1,1 +1,3 @@
 Simple javascript parser / formatter
+
+run rake to generate minified js file
