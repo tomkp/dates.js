@@ -1,5 +1,13 @@
 Simple javascript date parser / formatter
 
+examples:
+
+Dates.parse("12/03/2009 18:02", "dd/MM/yyyy HH:mm");
+
+Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "yyyy-MM-ddTHH:mm:ss.SSS");
+
+----------------------------------------------
+
 run rake to generate minified js file
 
 Date formatting based on http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
