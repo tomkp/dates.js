@@ -92,9 +92,9 @@ Riot.context('parsing dates', function() {
         should("parse 2010-04-14T18:02:39.123Z", Dates.parse("2010-04-14T18:02:39.123Z", "yyyy-MM-ddTHH:mm:ss.SSSZ")).equals(new Date(2010, 3, 14, 18, 02, 39, 123));
     });
 
-    given("the locale frFr and format dd MMM yyyy", function() {
+    /*given("the locale frFr and format dd MMM yyyy", function() {
         should("parse 12 mars 2009", Dates.parse("12 mars 2009", "dd MMM yyyy", "fr_Fr")).equals(new Date("03/12/2009"));
-    });
+    });*/
 
     given("the format ddMMMMyyyy", function() {
         should("parse 12March2009", Dates.parse("12March2009", "ddMMMMyyyy")).equals(new Date("03/12/2009"));
