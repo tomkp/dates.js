@@ -1,8 +1,8 @@
-Simple javascript parser / formatter
+Simple javascript date parser / formatter
 
 run rake to generate minified js file
 
-Formatting based on http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
+Date formatting based on http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
 
 y: Year eg: 1996, 96
 M: Month in year eg: July, Jul, 07
