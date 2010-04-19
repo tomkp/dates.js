@@ -157,7 +157,7 @@ Dates.parse = function(dateStr, format, locale) {
 Dates.format = function(date, format, locale) {
 
     locale = locale || "en_GB";
-    
+
     var pad = function(num) {
         return num < 10 ? "0" + num : num;
     };
