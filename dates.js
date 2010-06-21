@@ -1,12 +1,12 @@
 /*
- y 	Year 	                Year 	1996; 96
- M 	Month in year 	        Month 	July; Jul; 07
- d 	Day in month 	        Number 	10
- E 	Day in week 	        Text 	Tuesday; Tue
- H 	Hour in day (0-23) 	    Number 	18
- m 	Minute in hour 	        Number 	30
- s 	Second in minute 	    Number 	55
- S 	Millisecond 	        Number 	978
+ y  Year                Year    1996; 96
+ M  Month in year       Month   July; Jul; 07
+ d  Day in month        Number  10
+ E  Day in week         Text    Tuesday; Tue
+ H  Hour in day (0-23)  Number  18
+ m  Minute in hour      Number  30
+ s  Second in minute    Number  55
+ S  Millisecond         Number  978
  */
 
 (function(global) {
@@ -75,7 +75,9 @@
                 //80 years before and 20 after
                 value = Number(value);
                 var thisYear = new Date().getFullYear();
-                if ((value + 2000) - thisYear < 20) (value += 2000);
+                if ((value + 2000) - thisYear < 20) {
+                    value += 2000; 
+                }
                 date.setYear(value);
             },
             "HH": function(value) {
@@ -117,7 +119,7 @@
             var formatToken = formatTokens[i];
             var dateToken = dateTokens[i];
             var func = funcs[formatToken];
-            if (func != undefined) {
+            if (func !== undefined) {
                 // straightforward match
                 func(dateToken);
                 index = 0;
@@ -126,7 +128,7 @@
                 var res;
                 while ((res = /d{1,2}|M{1,4}|yy(?:yy)|H{1,2}|m{1,2}|s{1,2}|S{1,3}|\w/g.exec(formatToken)) !== null) {
                     func = funcs[res];
-                    if (func != undefined) {
+                    if (func !== undefined) {
                         if (res[0].match(/MMMM/)) {
                             token = /\D+/.exec(dateToken);
                             func(token[0]);
