@@ -6,11 +6,11 @@ Dates.parse("12/03/2009 18:02", "dd/MM/yyyy HH:mm");
 
 Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "yyyy-MM-ddTHH:mm:ss.SSS");
 
+TODO:  support for timezones.
+
 ----------------------------------------------
 
 run rake to generate minified js file
-
-Date formatting based on http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
 
 y: Year eg: 1996, 96
 M: Month in year eg: July, Jul, 07
@@ -20,4 +20,3 @@ H: Hour in day (0-23) eg: 9
 m: Minute in hour eg: 30
 s: Second in minute eg: 55
 S: Millisecond eg: 978
-Z: Time zone eg: -0800
