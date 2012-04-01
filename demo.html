@@ -2,9 +2,32 @@
 <html>
 <head>
     <title>#</title>
+    <script src="dates.js"> </script>
+
 </head>
 <body>
 
+<input id="format" value="ddMMyyyy" />
+<input id="value" value="20022009" />
+<span onclick="parse()">REFRESH</span>
+
+<div id="result" />
 
 </body>
+
+<script>
+
+
+    function parse() {
+        var value = document.getElementById("value").value;
+        var format = document.getElementById("format").value;
+        console.info(">", value, format);
+        var result = Dates.parse(value, format);
+        console.info("", result);
+        document.getElementById("result").innerHTML = result;
+    }
+
+    parse();
+
+</script>
 </html>

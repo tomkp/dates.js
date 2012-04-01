@@ -11,6 +11,8 @@
 
 (function(global) {
 
+    "use strict";
+
     var Dates = {
 
         i18n: {
@@ -28,7 +30,6 @@
 
     };
 
-    
 
 
     Dates.parse = function(dateStr, format, locale) {
@@ -43,7 +44,7 @@
 
         var indexOf = function(arr, value) {
             var i = 0;
-            while (i < arr.length && value != arr[i]) {
+            while (i < arr.length && value !== arr[i]) {
                 i++;
             }
             return i;
@@ -113,34 +114,56 @@
         };
 
         var index = 0, token;
+
         var formatTokens = format.split(/[^A-Za-z]/);
+
         var dateTokens = dateStr.split(/[^A-Za-z0-9]/);
+
         for (var i = 0; i < formatTokens.length; i++) {
+
             var formatToken = formatTokens[i];
             var dateToken = dateTokens[i];
             var func = funcs[formatToken];
+
             if (func !== undefined) {
                 // straightforward match
                 func(dateToken);
                 index = 0;
             } else {
+
                 // need to split format
+
                 var res;
-                while ((res = /d{1,2}|M{1,4}|yy(?:yy)|H{1,2}|m{1,2}|s{1,2}|S{1,3}|\w/g.exec(formatToken)) !== null) {
+
+                while ((res = /d{1,2}|M{1,4}|yy(?:yy)|H{1,2}|m{1,2}|s{1,2}|S{1,3}|\w/g.exec(formatToken))) {
+
                     func = funcs[res];
+
+                    var splitFormat = res[0];
+
                     if (func !== undefined) {
-                        if (res[0].match(/MMMM/)) {
+
+                        if (splitFormat.match(/MMMM/)) {
+
                             token = /\D+/.exec(dateToken);
                             func(token[0]);
                             index += token[0].length;
+
+                            formatToken = formatToken.substring(4);
+
                         } else {
-                            token = dateToken.substr(index, res[0].length);
+
+                            token = dateToken.substr(index, splitFormat.length);
+
                             func(token);
                             index += token.length;
+
+                            formatToken = formatToken.substring(splitFormat.length);
                         }
                     } else {
                         // any non formatting characters
-                        index += res[0].length;
+                        index += splitFormat.length;
+                        formatToken = formatToken.substring(splitFormat.length);
                     }
                 }
             }
@@ -214,6 +237,6 @@
 
     global.Dates = Dates;
 
-})(typeof window === 'undefined' ? this : window);
+})(this);
 
     
