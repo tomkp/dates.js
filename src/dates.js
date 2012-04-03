@@ -159,12 +159,15 @@
                             index += token.length;
 
                             formatToken = formatToken.substring(splitFormat.length);
+
                         }
                     } else {
                         // any non formatting characters
                         index += splitFormat.length;
                         formatToken = formatToken.substring(splitFormat.length);
                     }
+
+                    //console.info("");
                 }
             }
         }
