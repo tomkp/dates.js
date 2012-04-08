@@ -15,6 +15,8 @@
 
     var Dates = {
 
+        // very basic i18n capabilities
+        // eg: Dates.i18n.fr_FR = {}
         i18n: {
             en_GB: {
                 days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -24,6 +26,7 @@
             }
         },
 
+        // pad a value less than 10 with a 0 prefix
         pad: function(num) {
             return num < 10 ? "0" + num : num;
         }
@@ -31,17 +34,19 @@
     };
 
 
-
+    // parse a date, using a format (and optionl locale)
     Dates.parse = function(dateStr, format, locale) {
 
         locale = locale || "en_GB";
 
+        // construct base Date
         var date = new Date();
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
 
+        //
         var indexOf = function(arr, value) {
             var i = 0;
             while (i < arr.length && value !== arr[i]) {
@@ -113,61 +118,48 @@
             }
         };
 
-        var index = 0, token;
+        var
+            i = 0,
+            index = 0,
+            token,
+            // split the parsing format into tokens
+            formatTokens = format.split(/[^A-Za-z]/),
+            // split the date into tokens
+            dateTokens = dateStr.split(/[^A-Za-z0-9]/);
 
-        var formatTokens = format.split(/[^A-Za-z]/);
-
-        var dateTokens = dateStr.split(/[^A-Za-z0-9]/);
-
-        for (var i = 0; i < formatTokens.length; i++) {
-
+        for (; i < formatTokens.length; i++) {
             var formatToken = formatTokens[i];
             var dateToken = dateTokens[i];
             var func = funcs[formatToken];
-
             if (func !== undefined) {
                 // straightforward match
                 func(dateToken);
                 index = 0;
             } else {
-
                 // need to split format
-
                 var res;
-
+                // match the format token against a regex
                 while ((res = /d{1,2}|M{1,4}|yy(?:yy)|H{1,2}|m{1,2}|s{1,2}|S{1,3}|\w/g.exec(formatToken))) {
-
                     func = funcs[res];
-
                     var splitFormat = res[0];
-
                     if (func !== undefined) {
-
+                        // special case for full Month (eg: January)
                         if (splitFormat.match(/MMMM/)) {
-
                             token = /\D+/.exec(dateToken);
                             func(token[0]);
                             index += token[0].length;
-
                             formatToken = formatToken.substring(4);
-
                         } else {
-
                             token = dateToken.substr(index, splitFormat.length);
-
                             func(token);
                             index += token.length;
-
                             formatToken = formatToken.substring(splitFormat.length);
-
                         }
                     } else {
                         // any non formatting characters
                         index += splitFormat.length;
                         formatToken = formatToken.substring(splitFormat.length);
                     }
-
-                    //console.info("");
                 }
             }
         }
