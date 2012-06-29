@@ -1,10 +1,12 @@
 
 # Dates.js
 
-  Simple javascript date parser / formatter
+  Simple javascript date parser / formatter.
+
+  Minifies to < 3k.
 
 
-## Examples:
+## Examples
 
 ### Parsing a date
 
@@ -17,13 +19,13 @@
 
 ### Formatting
 
-- ```y```: Year eg: ```1996```, ```96```
-- ```M```: Month in year eg: ```July```, ```Jul```, ```07```
-- ```d```: Day in month eg: ```10```
-- ```E```: Day in week eg: ```Tuesday```, ```Tue```
-- ```H```: Hour in day (0-23) eg: ```9```
-- ```m```: Minute in hour eg: ```30```
-- ```s```: Second in minute eg: ```55```
-- ```S```: Millisecond eg: ```978```
+  ```y```: Year eg: ```1996```, ```96```
+  ```M```: Month in year eg: ```July```, ```Jul```, ```07```
+  ```d```: Day in month eg: ```10```
+  ```E```: Day in week eg: ```Tuesday```, ```Tue```
+  ```H```: Hour in day (0-23) eg: ```9```
+  ```m```: Minute in hour eg: ```30```
+  ```s```: Second in minute eg: ```55```
+  ```S```: Millisecond eg: ```978```
 
 
