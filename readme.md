@@ -5,7 +5,7 @@
 
   Minifies to < 3k.
 
-  [Mocha tests]()
+  [Mocha tests](https://github.com/tomkp/dates.js/blob/master/test/dates_tests.js)
 
 ## Examples
 
