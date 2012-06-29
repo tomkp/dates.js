@@ -3,11 +3,17 @@
 
   Simple javascript date parser / formatter
 
+
 ## Examples:
 
-  Parsing a date ```Dates.parse("12/03/2009 18:02", "dd/MM/yyyy HH:mm");```
+### Parsing a date
 
-  Formatting a date ```Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "yyyy-MM-ddTHH:mm:ss.SSS");```
+  ```Dates.parse("12/03/2009 18:02", "dd/MM/yyyy HH:mm");```
+
+### Formatting a date
+
+  ```Dates.format(new Date(2010, 3, 14, 18, 02, 39, 123), "yyyy-MM-ddTHH:mm:ss.SSS");```
+
 
 ### Formatting
 
