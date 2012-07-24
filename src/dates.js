@@ -9,8 +9,9 @@
  S  Millisecond         Number  978
  */
 
-(function(global) {
+(function (global) {
 
+    "use strict";
 
     var Dates = {
 
@@ -26,7 +27,7 @@
         },
 
         // pad a value less than 10 with a 0 prefix
-        pad: function(num) {
+        pad: function (num) {
             return num < 10 ? "0" + num : num;
         }
 
@@ -34,19 +35,21 @@
 
 
     // parse a date, using a format (and optionl locale)
-    Dates.parse = function(dateStr, format, locale) {
+    Dates.parse = function (dateStr, format, locale) {
 
         locale = locale || "en_GB";
 
         // construct base Date
-        var date = new Date();
+        var date = new Date(),
+            indexOf;
+
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
 
         //
-        var indexOf = function(arr, value) {
+        indexOf = function (arr, value) {
             var i = 0;
             while (i < arr.length && value !== arr[i]) {
                 i++;
@@ -55,64 +58,64 @@
         };
 
         var funcs = {
-            "dd": function(value) {
+            "dd": function (value) {
                 date.setDate(value);
             },
-            "d": function(value) {
+            "d": function (value) {
                 date.setDate(value);
             },
-            "MMMM": function(value) {
+            "MMMM": function (value) {
                 date.setMonth(indexOf(Dates.i18n[locale].months, value));
             },
-            "MMM": function(value) {
+            "MMM": function (value) {
                 date.setMonth(indexOf(Dates.i18n[locale].shortMonths, value));
             },
-            "MM": function(value) {
+            "MM": function (value) {
                 date.setMonth(Number(value) - 1);
             },
-            "M": function(value) {
+            "M": function (value) {
                 date.setMonth(Number(value) - 1);
             },
-            "yyyy": function(value) {
+            "yyyy": function (value) {
                 date.setYear(value);
             },
-            "yy": function(value) {
+            "yy": function (value) {
                 //80 years before and 20 after
                 value = Number(value);
                 var thisYear = new Date().getFullYear();
                 if ((value + 2000) - thisYear < 20) {
-                    value += 2000; 
+                    value += 2000;
                 }
                 date.setYear(value);
             },
-            "HH": function(value) {
+            "HH": function (value) {
                 date.setHours(value);
             },
-            "H": function(value) {
+            "H": function (value) {
                 date.setHours(value);
             },
-            "mm": function(value) {
+            "mm": function (value) {
                 date.setMinutes(value);
             },
-            "ss": function(value) {
+            "ss": function (value) {
                 date.setSeconds(value);
             },
-            "SSS": function(value) {
+            "SSS": function (value) {
                 date.setMilliseconds(value);
             },
-            "SS": function(value) {
+            "SS": function (value) {
                 date.setMilliseconds(value);
             },
-            "S": function(value) {
+            "S": function (value) {
                 date.setMilliseconds(value);
             },
-            "T": function() {
+            "T": function () {
                 // ignore
             },
-            "E": function() {
+            "E": function () {
                 // ignore
             },
-            "Z": function() {
+            "Z": function () {
                 // timezone
             }
         };
@@ -167,64 +170,64 @@
 
     
 
-    Dates.format = function(date, format, locale) {
+    Dates.format = function (date, format, locale) {
 
         locale = locale || "en_GB";
 
         date = new Date(date);
 
         var funcs = {
-            dd: function() {
+            dd: function () {
                 return Dates.pad(date.getDate());
             },
-            d: function() {
+            d: function () {
                 return date.getDate();
             },
-            MMMM: function() {
+            MMMM: function () {
                 return Dates.i18n[locale].months[date.getMonth()];
             },
-            MMM: function() {
+            MMM: function () {
                 return Dates.i18n[locale].shortMonths[date.getMonth()];
             },
-            MM: function() {
+            MM: function () {
                 return Dates.pad((date.getMonth() + 1));
             },
-            M: function() {
+            M: function () {
                 return (date.getMonth() + 1);
             },
-            yyyy: function() {
+            yyyy: function () {
                 return date.getFullYear();
             },
-            yy: function() {
+            yy: function () {
                 return String(date.getFullYear()).substr(2, 2);
             },
-            HH: function() {
+            HH: function () {
                 return Dates.pad(date.getHours());
             },
-            mm: function() {
+            mm: function () {
                 return Dates.pad(date.getMinutes());
             },
-            ss: function() {
+            ss: function () {
                 return Dates.pad(date.getSeconds());
             },
-            SSS: function() {
+            SSS: function () {
                 return Dates.pad(date.getMilliseconds());
             },
-            SS: function() {
+            SS: function () {
                 return Dates.pad(date.getMilliseconds());
             },
-            S: function() {
+            S: function () {
                 return date.getMilliseconds();
             },
-            EEEE: function() {
+            EEEE: function () {
                 return Dates.i18n[locale].days[date.getDay()];
             },
-            EEE: function() {
+            EEE: function () {
                 return Dates.i18n[locale].shortDays[date.getDay()];
             }
         };
 
-        return format.replace(/dd|d|M{1,4}|yyyy|yy|HH|mm|ss|S{1,3}|E{3,4}/g, function(match, index) {
+        return format.replace(/dd|d|M{1,4}|yyyy|yy|HH|mm|ss|S{1,3}|E{3,4}/g, function (match, index) {
             return funcs[match](match, index);
         });
     };
