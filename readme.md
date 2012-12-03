@@ -1,5 +1,5 @@
 
-# Dates.js
+# Dates.js - parsing & formatting dates using regexs
 
   Simple javascript date parser / formatter.
 
