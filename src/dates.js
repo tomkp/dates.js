@@ -24,38 +24,32 @@
                 months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
             }
-        },
-
-        // pad a value less than 10 with a 0 prefix
-        pad: function (num) {
-            return num < 10 ? "0" + num : num;
         }
-
     };
 
 
-    // parse a date, using a format (and optionl locale)
-    Dates.parse = function (dateStr, format, locale) {
+    function pad(num) {
+        // pad a value less than 10 with a 0 prefix
+        return num < 10 ? "0" + num : num;
+    }
 
-        locale = locale || "en_GB";
-
+    function createDateWithNoTime() {
         // construct base Date
-        var date = new Date(),
-            indexOf;
-
+        var date = new Date();
         date.setHours(0);
         date.setMinutes(0);
         date.setSeconds(0);
         date.setMilliseconds(0);
+        return date;
+    }
 
-        //
-        indexOf = function (arr, value) {
-            var i = 0;
-            while (i < arr.length && value !== arr[i]) {
-                i++;
-            }
-            return i;
-        };
+
+    // parse a date, using a format (and optional locale)
+    Dates.parse = function (dateStr, format, locale) {
+
+        locale = locale || "en_GB";
+
+        var date = createDateWithNoTime();
 
         var funcs = {
             "dd": function (value) {
@@ -65,10 +59,10 @@
                 date.setDate(value);
             },
             "MMMM": function (value) {
-                date.setMonth(indexOf(Dates.i18n[locale].months, value));
+                date.setMonth(Dates.i18n[locale].months.indexOf(value));
             },
             "MMM": function (value) {
-                date.setMonth(indexOf(Dates.i18n[locale].shortMonths, value));
+                date.setMonth(Dates.i18n[locale].shortMonths.indexOf(value));
             },
             "MM": function (value) {
                 date.setMonth(Number(value) - 1);
@@ -178,7 +172,7 @@
 
         var funcs = {
             dd: function () {
-                return Dates.pad(date.getDate());
+                return pad(date.getDate());
             },
             d: function () {
                 return date.getDate();
@@ -190,7 +184,7 @@
                 return Dates.i18n[locale].shortMonths[date.getMonth()];
             },
             MM: function () {
-                return Dates.pad((date.getMonth() + 1));
+                return pad((date.getMonth() + 1));
             },
             M: function () {
                 return (date.getMonth() + 1);
@@ -202,19 +196,19 @@
                 return String(date.getFullYear()).substr(2, 2);
             },
             HH: function () {
-                return Dates.pad(date.getHours());
+                return pad(date.getHours());
             },
             mm: function () {
-                return Dates.pad(date.getMinutes());
+                return pad(date.getMinutes());
             },
             ss: function () {
-                return Dates.pad(date.getSeconds());
+                return pad(date.getSeconds());
             },
             SSS: function () {
-                return Dates.pad(date.getMilliseconds());
+                return pad(date.getMilliseconds());
             },
             SS: function () {
-                return Dates.pad(date.getMilliseconds());
+                return pad(date.getMilliseconds());
             },
             S: function () {
                 return date.getMilliseconds();
